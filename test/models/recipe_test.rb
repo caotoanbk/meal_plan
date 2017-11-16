@@ -2,12 +2,32 @@ require "test_helper"
 
 describe Recipe do
 	describe "validity" do
-		it "requires a user" do
-			recipe.errors[:user].must_include
+		let(:recipe) { Recipe.new }
+
+		before do
+			recipe.valid?
 		end
-		it "requires a description"
-		it "requires a name"
-		it "requires the name to be unique for the same user"
-		it "does not requires the name to be unique for the different user"
+		it "requires a user" do
+			recipe.errors[:user].must_include "can't be blank"
+		end
+		it "requires a description" do
+			recipe.errors[:description].must_include "can't be blank"
+		end
+		it "requires a name" do 
+			recipe.errors[:name].must_include "can't be blank"
+		end
+		it "requires the name to be unique for the same user" do 
+			existing_recipe = create(:recipe)
+			recipe.name = existing_recipe.name
+			recipe.user = existing_recipe.user
+			recipe.valid?
+
+			recipe.errors[:name].must_include "has already been taken"
+		end
+		it "does not requires the name to be unique for the different user" do 
+			existing_recipe = create(:recipe)
+			recipe.name = existing_recipe.name
+			recipe.valid?
+		end
 	end
 end

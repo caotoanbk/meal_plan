@@ -12,6 +12,7 @@ gem 'rails', '~> 5.1.4'
 gem 'pg', '~> 0.18'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
+gem 'hirb', '~> 0.7.3'
 gem 'clearance', '~> 1.16', '>= 1.16.1'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -37,6 +38,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'minitest-rails'
   gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 group :development do
